@@ -1,0 +1,7 @@
+.env
+.idea
+.vscode
+venv/
+__pycache__/
+pg_data/
+src/media

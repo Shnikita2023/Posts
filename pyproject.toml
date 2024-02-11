@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "djangoposts"
+version = "0.1.0"
+description = "Проект про посты"
+authors = ["Никита Швейцер <shveitcer2023@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+django = "^4.2.10"
+django-extensions = "^3.2.3"
+django-debug-toolbar = "^4.3.0"
+python-decouple = "^3.8"
+psycopg2-binary = "^2.9.9"
+pillow = "^10.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

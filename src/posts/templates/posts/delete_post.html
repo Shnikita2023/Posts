@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Удаление поста</h1>
+<p>Вы точно хотите удалить этот пост?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="delete-button">Удалить</button>
+    <a class="cancel-button" href="{% url 'home' %}">Отмена</a>
+  </form>
+{% endblock %}

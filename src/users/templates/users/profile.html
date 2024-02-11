@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load custom_tags %}
+
+{% block content %}
+<div class="general-form">
+    <h1>Профиль</h1>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if user.photo %}
+        <p><img src="{{ user.photo.url }}"></p>
+        {% else %}
+        <p><img src="/media/users/default.jpg"></p>
+        {% endif %}
+        {% form_general form %}
+        <button class="submit-button" type="submit">Отправить</button>
+    </form>
+
+    <p><a href="{% url 'users:password_change' %}">Сменить пароль</a></p>
+</div>
+{% endblock %}

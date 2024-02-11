@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<ul class="list-articles">
+    {% for post in posts %}
+    {% if post.is_published %}
+    <li>
+        <div class="article-panel">
+            <p class="first"> Категория: {{ post.category.name }} | Автор:
+                {{ post.author.username|default:"неизвестен" }}</p>
+            <p class="last"> Дата: {{ post.time_update|date:"d-m-Y H:i:s" }}</p>
+        </div>
+        {% if post.photo %}
+        <p><img class="img-article-left thumb" src="{{ post.photo.url }}"></p>
+        {% endif %}
+        <h2>{{post.title}}</h2>
+        {% autoescape off %}
+        {{post.content|linebreaks|truncatewords:40}}
+        {% endautoescape %}
+        <div class="clear"></div>
+
+        <p class="link-post">
+            {% if post.author == user %}
+                <a style="background: #008000" href="{% url 'edit_post' post.slug %}">Редактировать пост</a>
+                <a style="background: #8B0000" href="{% url 'delete_post' post.slug %}">Удалить пост</a>
+                <a style="background: #00008B" href="{{ post.get_absolute_url }}">Читать пост</a>
+            {% else %}
+                <a style="background: #00008B" href="{{ post.get_absolute_url }}">Читать пост</a>
+            {% endif %}
+        </p>
+    </li>
+    {% endif %}
+    {% endfor %}
+</ul>
+{% endblock %}
+
+{% block navigation %}
+{% if page_obj.has_other_pages %}
+<nav class="list-pages">
+    <ul>
+        {% for page in paginator.page_range %}
+        {% if page == page_obj.number %}
+        <li class="page-num page-num-selected"> {{ page }}</li>
+        {% elif page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+        <li class="page-num">
+            <a href="?page={{page}}">{{ page }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</nav>
+{% endif %}
+{% endblock %}
